@@ -6,7 +6,7 @@ import FeatureCard from './FeatureCard';
 import { 
   MessageSquare, 
   Camera, 
-  Tool
+  Wrench
 } from 'lucide-react';
 
 const features = [
@@ -23,7 +23,7 @@ const features = [
     tooltipText: 'Privacy-focused emotion analysis'
   },
   {
-    icon: Tool,
+    icon: Wrench,
     title: 'Multiple AI Tools',
     description: 'Access many additional tools like chatbots and AI image generators.',
     tooltipText: 'Growing library of child-friendly AI tools'
