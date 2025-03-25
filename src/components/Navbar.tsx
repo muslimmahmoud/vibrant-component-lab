@@ -36,21 +36,6 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           <Logo />
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-sm font-medium hover:text-blue-500 transition-colors">
-              Home
-            </Link>
-            <Link to="/#features" className="text-sm font-medium hover:text-blue-500 transition-colors">
-              Features
-            </Link>
-            <Link to="/#pricing" className="text-sm font-medium hover:text-blue-500 transition-colors">
-              Pricing
-            </Link>
-            <Link to="/contact" className="text-sm font-medium hover:text-blue-500 transition-colors">
-              Contact
-            </Link>
-          </nav>
-
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="outline" size="sm">
               Log in
@@ -72,36 +57,6 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 animate-fade-in">
-            <nav className="flex flex-col space-y-4 pb-4">
-              <Link
-                to="/"
-                className="text-sm font-medium px-4 py-2 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                to="/#features"
-                className="text-sm font-medium px-4 py-2 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Features
-              </Link>
-              <Link
-                to="/#pricing"
-                className="text-sm font-medium px-4 py-2 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Pricing
-              </Link>
-              <Link
-                to="/contact"
-                className="text-sm font-medium px-4 py-2 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </Link>
-            </nav>
             <div className="grid grid-cols-2 gap-2 px-4 pt-2">
               <Button variant="outline" className="w-full" size="sm">
                 Log in
