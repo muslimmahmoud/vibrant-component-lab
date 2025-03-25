@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ToolIcon } from 'lucide-react';
+import { Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface LogoProps {
@@ -17,7 +17,7 @@ const Logo = ({ size = 'md', className = '' }: LogoProps) => {
 
   return (
     <Link to="/" className={`flex items-center gap-2 font-medium ${sizeClasses[size]} ${className}`}>
-      <ToolIcon className="text-blue-500" size={size === 'lg' ? 28 : size === 'md' ? 24 : 20} />
+      <Wrench className="text-blue-500" size={size === 'lg' ? 28 : size === 'md' ? 24 : 20} />
       <span className="font-semibold tracking-tight">Toolbox</span>
     </Link>
   );
