@@ -3,7 +3,6 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import FeatureSection from '@/components/FeatureSection';
-import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -13,7 +12,6 @@ const Index = () => {
       <main>
         <HeroSection />
         <FeatureSection />
-        <CTASection />
       </main>
       <Footer />
     </div>
