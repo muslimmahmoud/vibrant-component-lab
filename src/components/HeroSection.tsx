@@ -22,7 +22,7 @@ const HeroSection = () => {
             variants={fadeIn}
           >
             <Star size={14} className="mr-2" />
-            <span>Introducing Toolbox Pro</span>
+            <span>Introducing Toolbox</span>
           </motion.div>
           
           <motion.h1 
