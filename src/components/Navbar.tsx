@@ -29,7 +29,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'
+        isScrolled ? 'bg-black/80 backdrop-blur-lg shadow-md border-b border-gray-800' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,7 +37,7 @@ const Navbar = () => {
           <Logo />
 
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white">
+            <Button variant="outline" size="sm" className="border-blue-500 text-blue-400 hover:bg-blue-500/20">
               Log in
             </Button>
             <Button className="btn-gradient text-white" size="sm">
@@ -46,7 +46,7 @@ const Navbar = () => {
           </div>
 
           <button
-            className="md:hidden flex items-center"
+            className="md:hidden flex items-center text-white"
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
@@ -56,9 +56,9 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 animate-fade-in">
+          <div className="md:hidden py-4 animate-fade-in bg-black/90 border-t border-gray-800">
             <div className="grid grid-cols-2 gap-2 px-4 pt-2">
-              <Button variant="outline" className="w-full border-black text-black hover:bg-black hover:text-white" size="sm">
+              <Button variant="outline" className="w-full border-blue-500 text-blue-400 hover:bg-blue-500/20" size="sm">
                 Log in
               </Button>
               <Button className="btn-gradient w-full text-white" size="sm">

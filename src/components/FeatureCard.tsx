@@ -26,7 +26,7 @@ const FeatureCard = ({ icon: Icon, title, description, tooltipText, delay = 0 }:
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/10 text-blue-500">
+            <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400">
               <Icon size={24} />
             </div>
           </TooltipTrigger>
@@ -38,8 +38,8 @@ const FeatureCard = ({ icon: Icon, title, description, tooltipText, delay = 0 }:
         </Tooltip>
       </TooltipProvider>
 
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
+      <p className="text-gray-300">{description}</p>
     </motion.div>
   );
 };

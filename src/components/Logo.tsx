@@ -18,7 +18,7 @@ const Logo = ({ size = 'md', className = '' }: LogoProps) => {
   return (
     <Link to="/" className={`flex items-center gap-2 font-medium ${sizeClasses[size]} ${className}`}>
       <Wrench className="text-blue-500" size={size === 'lg' ? 28 : size === 'md' ? 24 : 20} />
-      <span className="font-semibold tracking-tight">Toolbox</span>
+      <span className="font-semibold tracking-tight text-white">Toolbox</span>
     </Link>
   );
 };

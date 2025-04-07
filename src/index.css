@@ -7,25 +7,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 0 0% 0%;
+    --background: 0 0% 0%; /* Changed to black */
+    --foreground: 0 0% 100%; /* Changed to white for general text */
+    --card: 0 0% 5%; /* Dark card background */
+    --card-foreground: 0 0% 100%; /* White text on cards */
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 210 100% 50%; /* Blue */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 95%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 0 0% 0%;
+    --secondary: 0 0% 10%; /* Dark secondary */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 210 100% 50%; /* Blue accent */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 0% 0%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 0%;
+    --border: 0 0% 20%; /* Darker border */
+    --input: 0 0% 20%;
+    --ring: 210 100% 50%; /* Blue ring */
     --radius: 0.5rem;
   }
 
@@ -43,7 +43,7 @@
   }
 
   .glass-card {
-    @apply bg-white backdrop-blur-lg border border-gray-200 shadow-lg;
+    @apply bg-black/50 backdrop-blur-lg border border-gray-800 shadow-lg; /* Darkened glass card */
   }
 
   .hover-lift {
@@ -51,7 +51,7 @@
   }
 
   .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-700;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600; /* Keep blue gradient for text */
   }
 
   .gradient-border {
@@ -67,14 +67,14 @@
     left: -1px;
     right: -1px;
     bottom: -1px;
-    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)));
     z-index: -1;
     border-radius: calc(var(--radius) + 1px);
   }
 
   .btn-gradient {
     @apply relative overflow-hidden transition-all duration-300;
-    background: linear-gradient(90deg, #000000, #333333);
+    background: linear-gradient(90deg, #0066ff, #3385ff); /* Blue gradient for buttons */
     background-size: 200% 100%;
     background-position: 0% 0%;
   }
