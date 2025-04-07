@@ -43,19 +43,19 @@ const FeatureSection = () => {
           variants={staggerContainer}
         >
           <motion.div 
-            className="inline-block px-3 py-1 mb-4 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium"
+            className="inline-block px-3 py-1 mb-4 rounded-full bg-blue-100 text-blue-600 text-sm font-medium"
             variants={fadeIn}
           >
             Features
           </motion.div>
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 text-white"
+            className="text-3xl md:text-4xl font-bold mb-4 text-gray-800"
             variants={fadeIn}
           >
             Everything you need in one place
           </motion.h2>
           <motion.p 
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg text-gray-600 max-w-2xl mx-auto"
             variants={fadeIn}
           >
             Our comprehensive suite of AI tools helps your child learn and grow

@@ -7,25 +7,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%; /* Changed to black */
-    --foreground: 0 0% 100%; /* Changed to white for general text */
-    --card: 0 0% 5%; /* Dark card background */
-    --card-foreground: 0 0% 100%; /* White text on cards */
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 210 100% 50%; /* Blue */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 10%; /* Dark secondary */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 210 100% 50%; /* Blue accent */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 0% 0%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 20%; /* Darker border */
-    --input: 0 0% 20%;
-    --ring: 210 100% 50%; /* Blue ring */
+    --background: 220 70% 98%; /* Light blue/white background */
+    --foreground: 222 47% 11%; /* Dark blue text */
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 222 47% 11%; /* Dark blue text on cards */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%; /* Blue primary */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%; /* Light blue secondary */
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221 83% 53%;
     --radius: 0.5rem;
   }
 
@@ -43,7 +43,7 @@
   }
 
   .glass-card {
-    @apply bg-black/50 backdrop-blur-lg border border-gray-800 shadow-lg; /* Darkened glass card */
+    @apply bg-white/70 backdrop-blur-lg border border-gray-200 shadow-lg;
   }
 
   .hover-lift {
@@ -51,7 +51,7 @@
   }
 
   .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600; /* Keep blue gradient for text */
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600;
   }
 
   .gradient-border {
@@ -74,7 +74,7 @@
 
   .btn-gradient {
     @apply relative overflow-hidden transition-all duration-300;
-    background: linear-gradient(90deg, #0066ff, #3385ff); /* Blue gradient for buttons */
+    background: linear-gradient(90deg, #3b82f6, #2563eb); /* Blue gradient for buttons */
     background-size: 200% 100%;
     background-position: 0% 0%;
   }
