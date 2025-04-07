@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { fadeIn, staggerContainer, slideIn } from "@/lib/animations"
 
-interface HeroProps extends React.HTMLAttributes<HTMLElement> {
+interface HeroProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
   badgeIcon?: React.ReactNode
   badgeText?: string
   title: React.ReactNode
