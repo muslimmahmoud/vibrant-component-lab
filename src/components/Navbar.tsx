@@ -29,7 +29,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm border-b border-gray-100' : 'bg-transparent'
+        isScrolled ? 'bg-white/10 backdrop-blur-lg shadow-sm' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,16 +37,16 @@ const Navbar = () => {
           <Logo />
 
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm" className="border-blue-500 text-blue-500 hover:bg-blue-50">
+            <Button variant="outline" size="sm">
               Log in
             </Button>
-            <Button className="btn-gradient text-white" size="sm">
+            <Button className="btn-gradient" size="sm">
               Get Started
             </Button>
           </div>
 
           <button
-            className="md:hidden flex items-center text-gray-800"
+            className="md:hidden flex items-center"
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
@@ -56,12 +56,12 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 animate-fade-in bg-white/90 border-t border-gray-100">
+          <div className="md:hidden py-4 animate-fade-in">
             <div className="grid grid-cols-2 gap-2 px-4 pt-2">
-              <Button variant="outline" className="w-full border-blue-500 text-blue-500 hover:bg-blue-50" size="sm">
+              <Button variant="outline" className="w-full" size="sm">
                 Log in
               </Button>
-              <Button className="btn-gradient w-full text-white" size="sm">
+              <Button className="btn-gradient w-full" size="sm">
                 Get Started
               </Button>
             </div>

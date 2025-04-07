@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-100 bg-gray-50">
+    <footer className="border-t border-gray-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col items-center justify-center text-center">
           <Logo className="mb-4" />
@@ -15,7 +15,7 @@ const Footer = () => {
             Powerful productivity tools to streamline your workflow and boost your efficiency.
           </p>
           
-          <div className="border-t border-gray-100 w-full max-w-md pt-6 mt-2">
+          <div className="border-t border-gray-200 w-full max-w-md pt-6 mt-2">
             <p className="text-gray-500 text-sm">
               © {currentYear} Toolbox Inc. All rights reserved.
             </p>

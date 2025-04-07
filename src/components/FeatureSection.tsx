@@ -43,13 +43,13 @@ const FeatureSection = () => {
           variants={staggerContainer}
         >
           <motion.div 
-            className="inline-block px-3 py-1 mb-4 rounded-full bg-blue-100 text-blue-600 text-sm font-medium"
+            className="inline-block px-3 py-1 mb-4 rounded-full bg-blue-500/10 text-blue-500 text-sm font-medium"
             variants={fadeIn}
           >
             Features
           </motion.div>
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-800"
+            className="text-3xl md:text-4xl font-bold mb-4"
             variants={fadeIn}
           >
             Everything you need in one place

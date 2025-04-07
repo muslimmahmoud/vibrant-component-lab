@@ -21,7 +21,7 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
         className={cn("relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden", className)}
         {...props}
       >
-        <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200 to-transparent" />
+        <div className="absolute inset-0 z-0 bg-gradient-radial from-blue-500/10 to-transparent" />
         
         <motion.div 
           className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
@@ -32,7 +32,7 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
           <div className="max-w-4xl mx-auto text-center">
             {(badgeIcon || badgeText) && (
               <motion.div
-                className="inline-flex items-center px-3 py-1 mb-8 rounded-full bg-black/10 text-black text-sm font-medium"
+                className="inline-flex items-center px-3 py-1 mb-8 rounded-full bg-blue-500/10 text-blue-500 text-sm font-medium"
                 variants={fadeIn}
               >
                 {badgeIcon && <span className="mr-2">{badgeIcon}</span>}
