@@ -18,16 +18,16 @@ const HeroSection = () => {
           <Button size="lg" className="btn-gradient">
             Get Started <ArrowRight size={16} className="ml-2" />
           </Button>
-          <Button size="lg" variant="outline">
+          <Button size="lg" variant="outline" className="border-black text-black hover:bg-black hover:text-white">
             View Demo
           </Button>
         </>
       }
       media={
-        <div className="aspect-video max-w-4xl mx-auto rounded-lg overflow-hidden border border-white/10 shadow-2xl relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 pointer-events-none z-10"></div>
-          <div className="bg-gray-900 w-full h-full flex items-center justify-center">
-            <div className="text-white opacity-40 font-medium">Dashboard Preview</div>
+        <div className="aspect-video max-w-4xl mx-auto rounded-lg overflow-hidden border border-black/10 shadow-2xl relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 pointer-events-none z-10"></div>
+          <div className="bg-gray-100 w-full h-full flex items-center justify-center">
+            <div className="text-black opacity-40 font-medium">Dashboard Preview</div>
           </div>
         </div>
       }
