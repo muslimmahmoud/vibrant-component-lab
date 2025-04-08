@@ -1,13 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,10 +39,19 @@ const Navbar = () => {
           <Logo />
 
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            <ThemeToggle />
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/login')}
+            >
               Log in
             </Button>
-            <Button className="btn-gradient" size="sm">
+            <Button 
+              className="btn-gradient" 
+              size="sm"
+              onClick={() => navigate('/login')}
+            >
               Get Started
             </Button>
           </div>
@@ -58,12 +69,24 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 animate-fade-in">
             <div className="grid grid-cols-2 gap-2 px-4 pt-2">
-              <Button variant="outline" className="w-full" size="sm">
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                size="sm" 
+                onClick={() => navigate('/login')}
+              >
                 Log in
               </Button>
-              <Button className="btn-gradient w-full" size="sm">
+              <Button 
+                className="btn-gradient w-full" 
+                size="sm"
+                onClick={() => navigate('/login')}
+              >
                 Get Started
               </Button>
+            </div>
+            <div className="flex justify-center mt-3">
+              <ThemeToggle />
             </div>
           </div>
         )}

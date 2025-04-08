@@ -3,8 +3,11 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Star } from 'lucide-react';
 import { Hero } from '@/components/ui/hero';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <Hero
       badgeIcon={<Star size={14} />}
@@ -15,10 +18,18 @@ const HeroSection = () => {
       description="A complete suite of productivity tools designed to help you work smarter, not harder. Streamline your process and boost efficiency."
       actions={
         <>
-          <Button size="lg" className="btn-gradient">
+          <Button 
+            size="lg" 
+            className="btn-gradient"
+            onClick={() => navigate('/login')}
+          >
             Get Started <ArrowRight size={16} className="ml-2" />
           </Button>
-          <Button size="lg" variant="outline">
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={() => navigate('/dashboard')}
+          >
             View Demo
           </Button>
         </>
