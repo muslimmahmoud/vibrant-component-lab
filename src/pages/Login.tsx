@@ -206,7 +206,7 @@ const Login = () => {
               className="w-full bg-[#0f172a] hover:bg-[#1e293b]"
               disabled={isLoading}
             >
-              Sign in with Email <Mail size={16} className="ml-1" />
+              {isSignUp ? "Sign up with Email" : "Sign in with Email"} <Mail size={16} className="ml-1" />
             </Button>
           </form>
 

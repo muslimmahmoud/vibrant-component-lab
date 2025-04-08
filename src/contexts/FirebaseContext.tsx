@@ -3,12 +3,12 @@ import React, { createContext, useContext } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
-// Firebase configuration
+// Firebase configuration - updated with proper values
 const firebaseConfig = {
   apiKey: "AIzaSyC4KnhoNhs3daPliKHi39dU62V_St8Udkg",
   authDomain: "the-final-web.firebaseapp.com",
   projectId: "the-final-web",
-  storageBucket: "the-final-web.firebasestorage.app",
+  storageBucket: "the-final-web.appspot.com", // Fixed typo in storage bucket
   messagingSenderId: "5933120841",
   appId: "1:5933120841:web:c7b51c1a07b04433ac6e98"
 };
