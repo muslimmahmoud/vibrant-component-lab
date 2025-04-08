@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,36 +9,88 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Logo from '@/components/Logo';
 import { useToast } from '@/hooks/use-toast';
+import { useFirebase } from '@/contexts/FirebaseContext';
+import { 
+  signInWithEmailAndPassword, 
+  signInWithPopup, 
+  signInAnonymously,
+  AuthError
+} from 'firebase/auth';
 
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { auth, providers } = useFirebase();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   
-  const handleEmailLogin = (e: React.FormEvent) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Integration with Supabase would happen here
-    toast({
-      title: "Login functionality",
-      description: "Supabase integration required. Please connect Supabase to enable authentication.",
-    });
-    navigate('/dashboard');
+    setIsLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      toast({
+        title: "Login successful",
+        description: "You have been logged in successfully.",
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      const authError = error as AuthError;
+      toast({
+        title: "Login failed",
+        description: authError.message || "Failed to login with email/password",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleProviderLogin = (provider: string) => {
-    // Integration with Supabase would happen here
-    toast({
-      title: `${provider} login`,
-      description: "Supabase integration required. Please connect Supabase to enable authentication.",
-    });
-    navigate('/dashboard');
+  const handleProviderLogin = async (provider: 'google' | 'github') => {
+    setIsLoading(true);
+    try {
+      if (provider === 'google') {
+        await signInWithPopup(auth, providers.google);
+      } else {
+        await signInWithPopup(auth, providers.github);
+      }
+      toast({
+        title: `${provider.charAt(0).toUpperCase() + provider.slice(1)} login successful`,
+        description: "You have been logged in successfully.",
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      const authError = error as AuthError;
+      toast({
+        title: "Login failed",
+        description: authError.message || `Failed to login with ${provider}`,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleGuestLogin = () => {
-    toast({
-      title: "Guest access",
-      description: "Logged in as a guest user",
-    });
-    navigate('/dashboard');
+  const handleGuestLogin = async () => {
+    setIsLoading(true);
+    try {
+      await signInAnonymously(auth);
+      toast({
+        title: "Guest access",
+        description: "Logged in as a guest user",
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      const authError = error as AuthError;
+      toast({
+        title: "Guest login failed",
+        description: authError.message || "Failed to login as guest",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -64,7 +116,10 @@ const Login = () => {
                   id="email" 
                   type="email" 
                   placeholder="name@example.com" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required 
+                  disabled={isLoading}
                 />
               </div>
               <div className="space-y-2">
@@ -80,10 +135,17 @@ const Login = () => {
                   id="password" 
                   type="password" 
                   placeholder="••••••••" 
-                  required 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  disabled={isLoading}
                 />
               </div>
-              <Button type="submit" className="w-full btn-gradient">
+              <Button 
+                type="submit" 
+                className="w-full btn-gradient"
+                disabled={isLoading}
+              >
                 Sign in with Email <Mail size={16} className="ml-1" />
               </Button>
             </form>
@@ -104,14 +166,16 @@ const Login = () => {
                 <Button 
                   variant="outline" 
                   className="w-full" 
-                  onClick={() => handleProviderLogin('GitHub')}
+                  onClick={() => handleProviderLogin('github')}
+                  disabled={isLoading}
                 >
                   <Github className="mr-2 h-4 w-4" /> GitHub
                 </Button>
                 <Button 
                   variant="outline" 
                   className="w-full" 
-                  onClick={() => handleProviderLogin('Google')}
+                  onClick={() => handleProviderLogin('google')}
+                  disabled={isLoading}
                 >
                   <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                     <path
@@ -141,6 +205,7 @@ const Login = () => {
                   variant="secondary" 
                   className="w-full"
                   onClick={handleGuestLogin}
+                  disabled={isLoading}
                 >
                   Continue as guest <ArrowRight size={16} className="ml-1" />
                 </Button>
