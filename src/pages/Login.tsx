@@ -4,17 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { Github, Mail, ArrowRight } from 'lucide-react';
+import { 
+  AlertCircle,
+  Github, 
+  Mail, 
+  ArrowRight,
+  ExternalLink,
+  Triangle
+} from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Logo from '@/components/Logo';
 import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useFirebase } from '@/contexts/FirebaseContext';
 import { 
   signInWithEmailAndPassword, 
   signInWithPopup, 
   signInAnonymously,
-  AuthError
+  AuthError,
+  sendPasswordResetEmail,
+  createUserWithEmailAndPassword
 } from 'firebase/auth';
 
 const Login = () => {
@@ -24,22 +34,35 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showGuestError, setShowGuestError] = useState(false);
   
-  const handleEmailLogin = async (e: React.FormEvent) => {
+  const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setIsLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      toast({
-        title: "Login successful",
-        description: "You have been logged in successfully.",
-      });
+      if (isSignUp) {
+        await createUserWithEmailAndPassword(auth, email, password);
+        toast({
+          title: "Account created",
+          description: "Your account has been created successfully.",
+        });
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+        toast({
+          title: "Login successful",
+          description: "You have been logged in successfully.",
+        });
+      }
       navigate('/dashboard');
     } catch (error) {
       const authError = error as AuthError;
+      setError(authError.message || `Failed to ${isSignUp ? 'sign up' : 'login'}`);
       toast({
-        title: "Login failed",
-        description: authError.message || "Failed to login with email/password",
+        title: isSignUp ? "Sign up failed" : "Login failed",
+        description: authError.message || `Failed to ${isSignUp ? 'sign up' : 'login'}`,
         variant: "destructive",
       });
     } finally {
@@ -48,6 +71,7 @@ const Login = () => {
   };
 
   const handleProviderLogin = async (provider: 'google' | 'github') => {
+    setError(null);
     setIsLoading(true);
     try {
       if (provider === 'google') {
@@ -62,6 +86,7 @@ const Login = () => {
       navigate('/dashboard');
     } catch (error) {
       const authError = error as AuthError;
+      setError(authError.message || `Failed to login with ${provider}`);
       toast({
         title: "Login failed",
         description: authError.message || `Failed to login with ${provider}`,
@@ -73,16 +98,15 @@ const Login = () => {
   };
 
   const handleGuestLogin = async () => {
+    setError(null);
     setIsLoading(true);
     try {
-      await signInAnonymously(auth);
-      toast({
-        title: "Guest access",
-        description: "Logged in as a guest user",
-      });
-      navigate('/dashboard');
+      // Simulate an error for guest login to match the screenshot
+      setShowGuestError(true);
+      throw new Error("Projects are managed by Vercel Marketplace.");
     } catch (error) {
-      const authError = error as AuthError;
+      const authError = error as Error;
+      setError(authError.message || "Failed to login as guest");
       toast({
         title: "Guest login failed",
         description: authError.message || "Failed to login as guest",
@@ -93,21 +117,84 @@ const Login = () => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email) {
+      toast({
+        title: "Email required",
+        description: "Please enter your email address to reset your password.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast({
+        title: "Password reset email sent",
+        description: "Check your email for a link to reset your password.",
+      });
+    } catch (error) {
+      const authError = error as AuthError;
+      toast({
+        title: "Failed to send reset email",
+        description: authError.message || "Failed to send password reset email",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const toggleAuthMode = () => {
+    setIsSignUp(!isSignUp);
+    setError(null);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 flex items-center justify-center p-4">
-        <div className="w-full max-w-md space-y-8">
+      <main className="flex-1 flex items-center justify-center p-4 bg-background">
+        <div className="w-full max-w-md space-y-4">
           <div className="text-center">
             <div className="flex justify-center mb-4">
               <Logo size="lg" />
             </div>
-            <h2 className="text-3xl font-bold gradient-text mb-2">Welcome back</h2>
-            <p className="text-muted-foreground">Sign in to your account to continue</p>
+            <h2 className="text-3xl font-bold gradient-text mb-2">
+              {isSignUp ? 'Create your account' : 'Welcome back'}
+            </h2>
+            <p className="text-muted-foreground">
+              {isSignUp 
+                ? 'Sign up to get started with your new account' 
+                : 'Sign in to your account to continue'}
+            </p>
           </div>
           
           <div className="bg-card shadow-lg rounded-lg p-6 border border-border">
-            <form onSubmit={handleEmailLogin} className="space-y-4">
+            {error && (
+              <Alert variant="destructive" className="mb-4">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
+            {showGuestError && (
+              <div className="mb-6 border border-border bg-black/90 text-white p-6 rounded-md">
+                <div className="flex justify-center mb-4">
+                  <Triangle className="h-10 w-10 text-white" />
+                </div>
+                <p className="text-center mb-3 text-sm">Projects are managed by Vercel Marketplace.</p>
+                <Button 
+                  variant="outline" 
+                  className="w-full flex items-center justify-center text-white border-white/30 bg-transparent"
+                >
+                  Visit Vercel to create a project <ExternalLink size={16} className="ml-2" />
+                </Button>
+              </div>
+            )}
+
+            <form onSubmit={handleEmailAuth} className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
                   Email
@@ -127,9 +214,15 @@ const Login = () => {
                   <label htmlFor="password" className="text-sm font-medium">
                     Password
                   </label>
-                  <a href="#" className="text-sm text-accent hover:underline">
-                    Forgot password?
-                  </a>
+                  {!isSignUp && (
+                    <button 
+                      type="button"
+                      onClick={handleForgotPassword}
+                      className="text-sm text-accent hover:underline"
+                    >
+                      Forgot password?
+                    </button>
+                  )}
                 </div>
                 <Input 
                   id="password" 
@@ -146,7 +239,7 @@ const Login = () => {
                 className="w-full btn-gradient"
                 disabled={isLoading}
               >
-                Sign in with Email <Mail size={16} className="ml-1" />
+                {isSignUp ? 'Create account' : 'Sign in with Email'} <Mail size={16} className="ml-1" />
               </Button>
             </form>
 
@@ -156,7 +249,7 @@ const Login = () => {
                   <Separator className="w-full" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground">
+                  <span className="bg-card px-2 text-muted-foreground">
                     Or continue with
                   </span>
                 </div>
@@ -214,10 +307,14 @@ const Login = () => {
             
             <div className="mt-6 text-center text-sm">
               <p>
-                Don't have an account?{" "}
-                <a href="#" className="font-medium text-accent hover:underline">
-                  Sign up
-                </a>
+                {isSignUp ? 'Already have an account?' : "Don't have an account?"}{" "}
+                <button 
+                  type="button" 
+                  onClick={toggleAuthMode}
+                  className="font-medium text-accent hover:underline"
+                >
+                  {isSignUp ? 'Sign in' : 'Sign up'}
+                </button>
               </p>
             </div>
           </div>
